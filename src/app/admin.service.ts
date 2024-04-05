@@ -13,9 +13,9 @@ export class AdminService {
     return this.http.post('http://localhost:5000/admin/login', data)
   }
   addStudent(data:any){
-    return this.http.post('http://localhost:5000/students/addstudent',data)
+    return this.http.post('http://localhost:5000/students/register',data)
   }
-  get(){
+  getStudents(){
     return this.http.get('http://localhost:5000/students/studentslist')
   }
   updatestudent(id:any,data:any){

@@ -46,17 +46,27 @@
           <input type="text" class="form-control" placeholder="section " formControlName="section">
 
         </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="form-label">photo</label>
+            <input type="file" class="form-control" placeholder="section " formControlName="uploadphoto"
+              (change)="selectFile($event)">
+
+          </div>
+        </div>
+
 
 
       </div>
       <div class="row">
+        
         <div class="col text-center mt-3">
-          <button type="submit" class="btn btn-primary" [disabled]="registerform.invalid" (click)="register()">register</button>
+          <button type="submit" class="btn btn-primary" (click)="register()">register</button>
         </div>
       </div>
     </div>
   </form>
-  
+
   <table class="table">
     <thead>
       <tr>
@@ -67,13 +77,15 @@
         <th>place</th>
         <th>dob</th>
         <th>section</th>
+        <th>photo</th>
         <th>Action</th>
-        
+
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let mani of manideep">
-        
+
         <td>{{mani.fullname}}</td>
         <td>{{mani.fathername}}</td>
         <td>{{mani.class}}</td>
@@ -81,100 +93,113 @@
         <td>{{mani.place}}</td>
         <td>{{mani.dob}}</td>
         <td>{{mani.section}}</td>
-        <td><div><a><i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#myModal"(click)="reset(mani)"></i></a>
-          
-          
-           
-            <a> <i class="bi bi-trash3"  (click)="delete(mani)"></i></a>
-          
-        </div>
-        
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-        
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">Update?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-        
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form [formGroup]=" Editregisterform">
-                  <div class="card mt-4">
-                    <div class="row">
-                      <div class="col-2"></div>
-                      <div class="col-3">
-                        <label class="form-label">fullname</label>
-                        <input type="text" class="form-control" placeholder="enter name" formControlName="fullname">
-              
-                      </div>
-                      <div class="col-3">
-                        <label class="form-label">fathername</label>
-                        <input type="text" class="form-control" placeholder="entername" formControlName="fathername">
-              
-                      </div>
-                      <div class="col-2"></div>
-                    </div>
-                    <div class="row">
-                      <div class="col-2"></div>
-                      <div class="col-3">
-                        <label class="form-label">class</label>
-                        <input type="number" class="form-control" placeholder="class" formControlName="class">
-              
-                      </div>
-                      <div class="col-3">
-                        <label class="form-label">mobileno</label>
-                        <input type="number" class="form-control" placeholder="mobileno" formControlName="mobileno">
-              
-                      </div>
-                      <div class="col-2"></div>
-                    </div>
-                    <div class="row">
-                      <div class="col-2"></div>
-                      <div class="col-3">
-                        <label class="form-label">place</label>
-                        <input type="text" class="form-control" placeholder="place" formControlName="place">
-              
-                      </div>
-                      <div class="col-3">
-                        <label class="form-label">dob</label>
-                        <input type="date" class="form-control" placeholder="dob " formControlName="dob">
-              
-                      </div>
-                      <div class="col-3">
-                        <label class="form-label">section</label>
-                        <input type="text" class="form-control" placeholder="section " formControlName="section">
-              
-                      </div>
-              
-              
-                    </div>
-                    <div class="row">
-                      <div class="col text-center mt-3">
-                        <button class="btn btn-primary" (click)="update()">update</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-        
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-                
-              </div>
-        
-            </div>
+        <td>
+          <img src="{{mani.uploadphoto}}" alt="user photo">
+        </td>
+        <td>
+          <div><a><i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#myModal"
+                (click)="editUser(mani)"></i></a>
+
+
+
+            <a> <i class="bi bi-trash3" (click)="delete(mani)"></i></a>
+
           </div>
-        
-        </div>
-          </td>
+
+          <!-- The Modal -->
+          <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Update?</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <form [formGroup]=" Editregisterform">
+                    <div class="card mt-4">
+                      <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                          <label class="form-label">fullname</label>
+                          <input type="text" class="form-control" placeholder="enter name" formControlName="fullname">
+
+                        </div>
+                        <div class="col-3">
+                          <label class="form-label">fathername</label>
+                          <input type="text" class="form-control" placeholder="entername" formControlName="fathername">
+
+                        </div>
+                        <div class="col-2"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                          <label class="form-label">class</label>
+                          <input type="number" class="form-control" placeholder="class" formControlName="class">
+
+                        </div>
+                        <div class="col-3">
+                          <label class="form-label">mobileno</label>
+                          <input type="number" class="form-control" placeholder="mobileno" formControlName="mobileno">
+
+                        </div>
+                        <div class="col-2"></div>
+                      </div>
+                      <div class="row">
+
+                        <div class="col-3">
+                          <label class="form-label">place</label>
+                          <input type="text" class="form-control" placeholder="place" formControlName="place">
+
+                        </div>
+                        <div class="col-3">
+                          <label class="form-label">dob</label>
+                          <input type="date" class="form-control" placeholder="dob " formControlName="dob">
+
+                        </div>
+                        <div class="col-3">
+                          <label class="form-label">section</label>
+                          <input type="text" class="form-control" placeholder="section " formControlName="section">
+
+                        </div>
+                        <div class="col-3">
+                          <label class="form-label">photo</label>
+                          <input type="file" class="form-control" placeholder="section " formControlName="uploadphoto ">
+
+                        </div>
+
+
+
+
+                      </div>
+                      <div class="row">
+                        <div class="col text-center mt-3">
+                          <button class="btn btn-primary" (click)="updateUser()">update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </td>
+
       </tr>
-     
+
     </tbody>
   </table>
-  
+
 </div>
